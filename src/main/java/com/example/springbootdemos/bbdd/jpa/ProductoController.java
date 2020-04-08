@@ -1,6 +1,5 @@
-package com.example.springbootdemos.jdbc;
+package com.example.springbootdemos.bbdd.jpa;
 
-import java.sql.SQLException;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@RequestMapping(path="/demo/jdbc/productos")
-public class JdbcController {
+@RequestMapping(path="/demo/bbdd/jpa/productos")
+public class ProductoController {
 	
 	@Autowired
 	private ProductoRepository productoRepository;
