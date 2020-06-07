@@ -1,4 +1,4 @@
-package com.example.springbootdemos.rest.simpleclient;
+package com.example.springbootdemos.rest.simpleclient.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;

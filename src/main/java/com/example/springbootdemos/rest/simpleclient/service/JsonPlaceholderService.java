@@ -1,7 +1,6 @@
-package com.example.springbootdemos.rest.simpleclient;
+package com.example.springbootdemos.rest.simpleclient.service;
 
-import java.util.Optional;
-
+import com.example.springbootdemos.rest.simpleclient.model.TodoData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
@@ -19,6 +18,5 @@ public class JsonPlaceholderService {
 	
 	public TodoData getTodo(int id) {
 		return restTemplate.getForObject("https://jsonplaceholder.typicode.com/todos/"+id, TodoData.class);
-
 	}
 }

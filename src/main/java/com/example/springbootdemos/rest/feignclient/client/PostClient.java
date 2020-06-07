@@ -1,7 +1,8 @@
-package com.example.springbootdemos.rest.feignclient;
+package com.example.springbootdemos.rest.feignclient.client;
 
 import java.util.List;
 
+import com.example.springbootdemos.rest.feignclient.model.PostData;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

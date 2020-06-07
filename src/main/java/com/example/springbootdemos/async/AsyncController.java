@@ -1,6 +1,6 @@
 package com.example.springbootdemos.async;
 
-import com.example.springbootdemos.rest.simpleclient.TodoData;
+import com.example.springbootdemos.rest.simpleclient.model.TodoData;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

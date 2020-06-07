@@ -1,7 +1,7 @@
 package com.example.springbootdemos.rest.feign;
 
-import com.example.springbootdemos.rest.feignclient.PostClient;
-import com.example.springbootdemos.rest.feignclient.PostData;
+import com.example.springbootdemos.rest.feignclient.client.PostClient;
+import com.example.springbootdemos.rest.feignclient.model.PostData;
 import com.example.springbootdemos.rest.shared.BaseControllerTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;

@@ -1,5 +1,7 @@
-package com.example.springbootdemos.rest.simpleclient;
+package com.example.springbootdemos.rest.simpleclient.controller;
 
+import com.example.springbootdemos.rest.simpleclient.service.JsonPlaceholderService;
+import com.example.springbootdemos.rest.simpleclient.model.TodoData;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +19,8 @@ public class JsonPlaceholderController {
 	private JsonPlaceholderService jsonPlaceholderService;
 	
 	@GetMapping(path="/todo/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody TodoData getTodo(@PathVariable(required=true) Integer id) {
+	public @ResponseBody
+    TodoData getTodo(@PathVariable(required=true) Integer id) {
 		return jsonPlaceholderService.getTodo(id);
 	}
 

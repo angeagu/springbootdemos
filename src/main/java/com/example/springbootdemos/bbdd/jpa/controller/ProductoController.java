@@ -1,7 +1,9 @@
-package com.example.springbootdemos.bbdd.jpa;
+package com.example.springbootdemos.bbdd.jpa.controller;
 
 import java.util.Arrays;
 
+import com.example.springbootdemos.bbdd.jpa.repository.ProductoRepository;
+import com.example.springbootdemos.bbdd.jpa.model.Producto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

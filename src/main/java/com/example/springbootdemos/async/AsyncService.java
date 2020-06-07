@@ -1,6 +1,6 @@
 package com.example.springbootdemos.async;
 
-import com.example.springbootdemos.rest.simpleclient.TodoData;
+import com.example.springbootdemos.rest.simpleclient.model.TodoData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.scheduling.annotation.Async;

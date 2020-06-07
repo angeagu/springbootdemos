@@ -1,4 +1,4 @@
-package com.example.springbootdemos.bbdd.jpa;
+package com.example.springbootdemos.bbdd.jpa.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

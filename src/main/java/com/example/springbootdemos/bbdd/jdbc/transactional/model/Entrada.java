@@ -1,4 +1,4 @@
-package com.example.springbootdemos.bbdd.jdbc.transactional;
+package com.example.springbootdemos.bbdd.jdbc.transactional.model;
 
 import lombok.Data;
 

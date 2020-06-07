@@ -1,4 +1,4 @@
-package com.example.springbootdemos.rest.feignclient;
+package com.example.springbootdemos.rest.feignclient.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

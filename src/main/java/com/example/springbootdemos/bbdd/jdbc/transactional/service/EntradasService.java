@@ -1,5 +1,6 @@
-package com.example.springbootdemos.bbdd.jdbc.transactional;
+package com.example.springbootdemos.bbdd.jdbc.transactional.service;
 
+import com.example.springbootdemos.bbdd.jdbc.transactional.model.Entrada;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
