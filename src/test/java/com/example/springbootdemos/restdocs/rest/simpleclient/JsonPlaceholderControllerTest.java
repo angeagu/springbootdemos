@@ -1,22 +1,19 @@
-package com.example.springbootdemos.rest.simpleclient;
+package com.example.springbootdemos.restdocs.rest.simpleclient;
 
-import static org.mockito.Mockito.mock;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import com.example.springbootdemos.rest.shared.BaseControllerTest;
 import com.example.springbootdemos.rest.simpleclient.model.TodoData;
 import com.example.springbootdemos.rest.simpleclient.service.JsonPlaceholderService;
+import com.example.springbootdemos.restdocs.rest.BaseControllerTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import static org.mockito.Mockito.when;
-
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+
+import static org.mockito.Mockito.when;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @AutoConfigureRestDocs(outputDir = "target/snippets")
 public class JsonPlaceholderControllerTest extends BaseControllerTest {
@@ -37,7 +34,7 @@ public class JsonPlaceholderControllerTest extends BaseControllerTest {
     			.accept(MediaType.APPLICATION_JSON_VALUE))
     			.andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
-                .andDo(MockMvcRestDocumentation.document("jsonplaceholder/todo",
+                .andDo(MockMvcRestDocumentation.document("simpleclient/jsonplaceholder/todo",
 						responseFields(
 								fieldWithPath("completed").description("Todo Status (true=completed)"),
 								fieldWithPath("id").description("Todo ID"),

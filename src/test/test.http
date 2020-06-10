@@ -1,0 +1,33 @@
+GET localhost:8080/demo/basicrest/empleados
+
+###
+
+POST localhost:8080/demo/basicrest/empleado
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": "AWT",
+  "nombre": "Angel",
+  "apellido": "Aguado",
+  "cargo": "CEO"
+}
+
+###
+
+PUT localhost:8080/demo/basicrest/empleado
+Accept: application/json
+Content-Type: application/json
+
+    {
+        "id": "AWT",
+        "nombre": "Angel",
+        "apellido": "Aguado Andres",
+        "cargo": "Tech Lead"
+    }
+
+###
+
+DELETE localhost:8080/demo/basicrest/empleado/AWT
+
+###

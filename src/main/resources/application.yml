@@ -4,3 +4,11 @@ spring:
     - mysql
     - feign
     - mongo
+
+logging:
+  level:
+    com:
+      example:
+        springbootdemos:
+          rest:
+            feignclient: DEBUG

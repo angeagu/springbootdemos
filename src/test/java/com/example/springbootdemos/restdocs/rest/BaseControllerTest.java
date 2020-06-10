@@ -1,4 +1,4 @@
-package com.example.springbootdemos.rest.shared;
+package com.example.springbootdemos.restdocs.rest;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;

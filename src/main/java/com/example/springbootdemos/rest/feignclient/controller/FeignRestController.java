@@ -7,7 +7,6 @@ import com.example.springbootdemos.rest.feignclient.model.PostData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,10 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(path="/demo/rest/feign/jsonplaceholder")
 public class FeignRestController {
-
 
 	@Autowired
 	private PostClient postClient;
@@ -39,8 +39,8 @@ public class FeignRestController {
 	}
 	
 	@PostMapping(path="/posts", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity addPost(@RequestBody @Validated PostData postData) {
-		return ResponseEntity.ok().build();
+	public @ResponseBody ResponseEntity addPost(@RequestBody @Valid PostData postData) {
+		return ResponseEntity.ok(postClient.create(postData));
 	}
 	
 }

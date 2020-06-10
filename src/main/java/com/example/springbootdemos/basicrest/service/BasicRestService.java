@@ -2,6 +2,7 @@ package com.example.springbootdemos.basicrest.service;
 
 import com.example.springbootdemos.basicrest.exception.EmpleadoNoEncontradoException;
 import com.example.springbootdemos.basicrest.model.Empleado;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -9,9 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class BasicRestService {
 
-    private static List<Empleado> listaEmpleados = new ArrayList<>();
+    private final List<Empleado> listaEmpleados;
 
     public void addEmpleado(Empleado e) {
         listaEmpleados.add(e);

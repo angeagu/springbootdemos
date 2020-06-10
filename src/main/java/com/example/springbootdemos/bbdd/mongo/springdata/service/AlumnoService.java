@@ -3,6 +3,7 @@ package com.example.springbootdemos.bbdd.mongo.springdata.service;
 import com.example.springbootdemos.bbdd.mongo.model.Alumno;
 import com.example.springbootdemos.bbdd.mongo.repository.AlumnoRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class AlumnoService {
 
+    @Autowired
     private final AlumnoRepository alumnoRepository;
 
     public void addAlumno(Alumno alumno) {
