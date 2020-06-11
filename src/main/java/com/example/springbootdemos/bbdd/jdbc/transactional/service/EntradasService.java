@@ -13,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Slf4j
 public class EntradasService {
+
     private final JdbcTemplate jdbcTemplate;
 
     @Transactional

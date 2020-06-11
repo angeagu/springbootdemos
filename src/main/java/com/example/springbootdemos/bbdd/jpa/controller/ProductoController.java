@@ -1,6 +1,9 @@
 package com.example.springbootdemos.bbdd.jpa.controller;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import com.example.springbootdemos.bbdd.jpa.repository.ProductoRepository;
 import com.example.springbootdemos.bbdd.jpa.model.Producto;
@@ -15,7 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -27,16 +29,16 @@ public class ProductoController {
 	private ProductoRepository productoRepository;
 	
 	@GetMapping(path="/select", produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity selectProductos(@RequestParam(required=false) Integer id_producto) {	
+	public ResponseEntity<List<Producto>> selectProductos(@RequestParam(required=false) Integer id_producto) {
 		if(id_producto!=null) {
 			Integer[] array = {id_producto};
-			return ResponseEntity.ok(productoRepository.findAllById(Arrays.asList(array)));
+			return ResponseEntity.ok().body(productoRepository.findAllById(Arrays.asList(array)));
 		}
-	    return ResponseEntity.ok(productoRepository.findAll());
+		return ResponseEntity.ok().body(productoRepository.findAll());
 	}
 	
 	@PostMapping(path="/insert", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity insertProducto(@RequestBody(required=true) Producto producto) {
+	public ResponseEntity insertProducto(@RequestBody(required=true) Producto producto) {
 		try {
 			productoRepository.save(producto);
 			return ResponseEntity.ok().build();
@@ -49,7 +51,7 @@ public class ProductoController {
 	}
 	
 	@DeleteMapping(path="/delete/{id_producto}") //id producto as PathVariable
-	public @ResponseBody ResponseEntity deleteProducto(@PathVariable(required=true) Integer id_producto) {
+	public ResponseEntity deleteProducto(@PathVariable(required=true) Integer id_producto) {
 		productoRepository.deleteById(id_producto);
 		return ResponseEntity.ok().build();
 	}

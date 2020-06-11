@@ -3,10 +3,8 @@ package com.example.springbootdemos.basicrest.service;
 import com.example.springbootdemos.basicrest.exception.EmpleadoNoEncontradoException;
 import com.example.springbootdemos.basicrest.model.Empleado;
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

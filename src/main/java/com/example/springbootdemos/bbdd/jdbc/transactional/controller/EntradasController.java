@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping(path="/demo/bbdd/jdbc/transactional/entradas")
@@ -18,13 +19,14 @@ public class EntradasController {
 
     @Transactional
     @PostMapping("/add")
-    public @ResponseBody ResponseEntity addEntrada(@RequestBody @Valid Entrada entrada) {
+    public ResponseEntity addEntrada(@RequestBody @Valid Entrada entrada) {
         entradasService.add(entrada);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/peliculas")
-    public @ResponseBody ResponseEntity getPeliculas() {
+    public ResponseEntity<List<String>> getPeliculas() {
         return ResponseEntity.ok(entradasService.getPeliculas());
     }
 }
+

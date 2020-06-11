@@ -20,7 +20,7 @@ public interface PostClient {
 	public PostData findById(@PathVariable("id") int id);
 	
 	@GetMapping(path="/posts", produces = MediaType.APPLICATION_JSON_VALUE)
-	public PostData findByUserId(@RequestParam(required=true) Integer userId);
+	public List<PostData> findByUserId(@RequestParam(required=true) Integer userId);
 	
 	@PostMapping(path="/posts", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> create(@RequestBody @Valid PostData postsData);
