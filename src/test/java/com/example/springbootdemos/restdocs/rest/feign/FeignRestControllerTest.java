@@ -3,21 +3,23 @@ package com.example.springbootdemos.restdocs.rest.feign;
 import com.example.springbootdemos.rest.feignclient.client.PostClient;
 import com.example.springbootdemos.rest.feignclient.model.PostData;
 import com.example.springbootdemos.restdocs.rest.BaseControllerTest;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @AutoConfigureRestDocs(outputDir = "target/snippets")
@@ -87,9 +89,38 @@ public class FeignRestControllerTest extends BaseControllerTest {
         postData.setBody("Mocked Body");
         postData.setTitle("Title mocked");
         postData.setUserId(2);
-        when(postClient.findById(22)).thenReturn(postData);
-        this.mockMvc.perform(get("/demo/rest/feign/jsonplaceholder/posts/22")
-                .contentType((MediaType.APPLICATION_JSON))
+
+        when(postClient.create(any(PostData.class))).thenReturn(ResponseEntity.ok().build());
+
+        String content = new ObjectMapper().writeValueAsString(postData);
+        this.mockMvc.perform(post("/demo/rest/feign/jsonplaceholder/posts")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(content)
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isOk())
+                .andDo(MockMvcRestDocumentation.document("feign/jsonplaceholder/posts",
+                        responseFields(
+                                fieldWithPath("headers").description("HTTP response headers"),
+                                fieldWithPath("statusCode").description("HTTP status message"),
+                                fieldWithPath("statusCodeValue").description("HTTP status code"),
+                                fieldWithPath("body").description("HTTP response body")
+                        )));
+    }
+
+    @Test
+    void updatePost() throws Exception {
+        PostData postData = new PostData();
+        postData.setId(1);
+        postData.setBody("Updated Mocked Body");
+        postData.setTitle("Updated mocked title");
+        postData.setUserId(2);
+
+        when(postClient.update(any(Integer.class), any(PostData.class))).thenReturn(postData);
+        String content = new ObjectMapper().writeValueAsString(postData);
+        this.mockMvc.perform(put("/demo/rest/feign/jsonplaceholder/posts/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(content)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())

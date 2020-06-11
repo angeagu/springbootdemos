@@ -4,17 +4,11 @@ import java.util.stream.Collectors;
 
 import com.example.springbootdemos.rest.feignclient.client.PostClient;
 import com.example.springbootdemos.rest.feignclient.model.PostData;
+import com.example.springbootdemos.rest.simpleclient.model.TodoData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -41,6 +35,11 @@ public class FeignRestController {
 	@PostMapping(path="/posts", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity addPost(@RequestBody @Valid PostData postData) {
 		return ResponseEntity.ok(postClient.create(postData));
+	}
+
+	@PutMapping(path="/posts/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity updateTodo(@PathVariable(required=true) Integer id, @RequestBody @Valid PostData postData) {
+		return ResponseEntity.ok(postClient.update(id,postData));
 	}
 	
 }
