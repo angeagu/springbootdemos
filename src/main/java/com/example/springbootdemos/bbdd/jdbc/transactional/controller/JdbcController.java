@@ -2,6 +2,7 @@ package com.example.springbootdemos.bbdd.jdbc.transactional.controller;
 
 import com.example.springbootdemos.bbdd.jdbc.transactional.service.EntradasService;
 import com.example.springbootdemos.bbdd.jdbc.transactional.model.Entrada;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,14 +12,18 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(path="/demo/bbdd/jdbc/transactional/entradas")
-public class EntradasController {
+@RequestMapping(path="/demo/bbdd/jdbc")
+@AllArgsConstructor
+public class JdbcController {
 
-    @Autowired
-    EntradasService entradasService;
+    private final EntradasService entradasService;
 
-    @Transactional
-    @PostMapping("/add")
+    @GetMapping("/entradas")
+    public ResponseEntity<List<Entrada>> getEntradas() {
+        return ResponseEntity.ok().body(entradasService.getEntradas());
+    }
+
+    @PostMapping("/entradas")
     public ResponseEntity addEntrada(@RequestBody @Valid Entrada entrada) {
         entradasService.add(entrada);
         return ResponseEntity.ok().build();

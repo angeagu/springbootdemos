@@ -12,3 +12,7 @@ logging:
         springbootdemos:
           rest:
             feignclient: DEBUG
+    org:
+      springframework:
+        security: DEBUG
+

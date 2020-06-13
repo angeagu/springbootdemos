@@ -27,4 +27,5 @@ public interface PostClient {
 
 	@PutMapping(path="/posts/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public PostData update(@PathVariable("id") int id, @RequestBody @Valid PostData postsData);
+
 }

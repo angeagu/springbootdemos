@@ -16,6 +16,16 @@ public class EntradasService {
 
     private final JdbcTemplate jdbcTemplate;
 
+    public List<Entrada> getEntradas() {
+        return jdbcTemplate.query("SELECT * FROM ENTRADAS",
+                (rs, rowNum) ->
+                    new Entrada(rs.getLong("id"),
+                            rs.getString("pelicula"),
+                            rs.getDouble("precio"),
+                            rs.getDate("fecha"))
+                );
+    }
+
     @Transactional
     public void add(Entrada entrada) {
         log.info("add - " + entrada.toString());

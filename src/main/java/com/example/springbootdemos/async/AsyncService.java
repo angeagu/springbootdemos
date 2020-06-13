@@ -18,10 +18,11 @@ public class AsyncService {
         this.restTemplate = builder.build();
     }
 
-    @Async
+    @Async //Indica que debe ejecutarse en un thread aparte.
     public CompletableFuture<TodoData> getTodo(int id) throws InterruptedException{
         TodoData todoData = restTemplate.getForObject("https://jsonplaceholder.typicode.com/todos/"+id, TodoData.class);
         Thread.sleep(1000); //Simulamos un retardo artificial
+        //En lugar de TodoData, devolvemos un CompletableFuture<TodoData>
         return CompletableFuture.completedFuture(todoData);
     }
 

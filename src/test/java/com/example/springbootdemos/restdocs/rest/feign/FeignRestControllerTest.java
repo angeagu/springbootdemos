@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
@@ -57,6 +58,8 @@ public class FeignRestControllerTest extends BaseControllerTest {
                                 fieldWithPath("[].title").description("Post Title"),
                                 fieldWithPath("[].userId").description("Post User ID")
                         )));
+
+
     }
 
     @Test
@@ -67,8 +70,8 @@ public class FeignRestControllerTest extends BaseControllerTest {
         postData.setTitle("Title mocked");
         postData.setUserId(2);
 
-        when(postClient.findById(22)).thenReturn(postData);
-        this.mockMvc.perform(get("/demo/rest/feign/jsonplaceholder/posts/22")
+        when(postClient.findById(1)).thenReturn(postData);
+        this.mockMvc.perform(get("/demo/rest/feign/jsonplaceholder/posts/1")
                 .contentType((MediaType.APPLICATION_JSON))
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
@@ -80,6 +83,7 @@ public class FeignRestControllerTest extends BaseControllerTest {
                                 fieldWithPath("title").description("Post Title"),
                                 fieldWithPath("userId").description("Post User ID")
                         )));
+        verify(postClient).findById(1);
     }
 
     @Test
@@ -91,7 +95,6 @@ public class FeignRestControllerTest extends BaseControllerTest {
         postData.setUserId(2);
 
         when(postClient.create(any(PostData.class))).thenReturn(ResponseEntity.ok().build());
-
         String content = new ObjectMapper().writeValueAsString(postData);
         this.mockMvc.perform(post("/demo/rest/feign/jsonplaceholder/posts")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -106,6 +109,8 @@ public class FeignRestControllerTest extends BaseControllerTest {
                                 fieldWithPath("statusCodeValue").description("HTTP status code"),
                                 fieldWithPath("body").description("HTTP response body")
                         )));
+        verify(postClient).create(any(PostData.class));
+
     }
 
     @Test
@@ -116,7 +121,7 @@ public class FeignRestControllerTest extends BaseControllerTest {
         postData.setTitle("Updated mocked title");
         postData.setUserId(2);
 
-        when(postClient.update(any(Integer.class), any(PostData.class))).thenReturn(postData);
+        when(postClient.update(1, postData)).thenReturn(postData);
         String content = new ObjectMapper().writeValueAsString(postData);
         this.mockMvc.perform(put("/demo/rest/feign/jsonplaceholder/posts/1")
                 .contentType(MediaType.APPLICATION_JSON)
