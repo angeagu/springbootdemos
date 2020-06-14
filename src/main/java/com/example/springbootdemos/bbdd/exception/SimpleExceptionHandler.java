@@ -1,4 +1,4 @@
-package com.example.springbootdemos.exceptionhandling;
+package com.example.springbootdemos.bbdd.exception;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -21,6 +21,6 @@ public class SimpleExceptionHandler extends ResponseEntityExceptionHandler {
 		Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
         body.put("message", "SQL Exception. Se puede definir aqui una respuesta especifica para la aplicacion");
-        return handleExceptionInternal(ex, body, new HttpHeaders(), HttpStatus.CONFLICT, request);
+        return handleExceptionInternal(ex, body, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
 	}
 }

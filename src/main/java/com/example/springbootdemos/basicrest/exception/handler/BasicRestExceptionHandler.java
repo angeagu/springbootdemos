@@ -1,4 +1,4 @@
-package com.example.springbootdemos.basicrest.handler;
+package com.example.springbootdemos.basicrest.exception.handler;
 
 import com.example.springbootdemos.basicrest.exception.EmpleadoNoEncontradoException;
 import org.springframework.http.HttpStatus;
@@ -16,4 +16,5 @@ class BasicRestExceptionHandler {
     String employeeNotFoundHandler(EmpleadoNoEncontradoException ex) {
         return ex.getMessage();
     }
+
 }
