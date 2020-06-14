@@ -2,6 +2,7 @@ package com.example.springbootdemos.bbdd.mongo.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
@@ -12,6 +13,7 @@ public class Alumno {
     private int id;
     private String nombre;
     private String apellido;
-    private String direccion;
-
+    private DatosContacto datosContacto;
+    @DBRef
+    private Colegio colegio;
 }

@@ -1,4 +1,4 @@
-package com.example.springbootdemos.basicrest.model;
+package com.example.springbootdemos.basicrest.request;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

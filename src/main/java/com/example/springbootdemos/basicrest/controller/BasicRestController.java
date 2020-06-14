@@ -1,7 +1,10 @@
 package com.example.springbootdemos.basicrest.controller;
 
-import com.example.springbootdemos.basicrest.model.Empleado;
+import com.example.springbootdemos.basicrest.dto.EmpleadoDTO;
+import com.example.springbootdemos.basicrest.mapper.EmpleadoMapper;
+import com.example.springbootdemos.basicrest.request.Empleado;
 import com.example.springbootdemos.basicrest.service.BasicRestService;
+import com.example.springbootdemos.basicrest.service.IBasicRestService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -17,27 +20,27 @@ import java.util.List;
 public class BasicRestController {
 
     @Autowired
-    private final BasicRestService basicRestService;
+    private final IBasicRestService basicRestService;
 
     @GetMapping(value="/empleados", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Empleado>> getEmpleados() {
+    public ResponseEntity<List<EmpleadoDTO>> getEmpleados() {
         return ResponseEntity.ok().body(basicRestService.getEmpleados());
     }
 
     @GetMapping(value="/empleado/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Empleado> getEmpleado(@PathVariable(required=true) String id) {
+    public ResponseEntity<EmpleadoDTO> getEmpleado(@PathVariable(required=true) String id) {
         return ResponseEntity.ok().body(basicRestService.getEmpleado(id));
     }
 
     @PostMapping(value="/empleado", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity addEmpleado(@RequestBody @Valid Empleado e) {
-        basicRestService.addEmpleado(e);
+        basicRestService.addEmpleado(EmpleadoMapper.toEmpleadoDTO(e));
         return ResponseEntity.ok().build();
     }
 
     @PutMapping(value="/empleado", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Empleado> updateEmpleado(@RequestBody @Valid Empleado e) {
-        basicRestService.updateEmpleado(e);
+    public ResponseEntity<EmpleadoDTO> updateEmpleado(@RequestBody @Valid Empleado e) {
+        basicRestService.updateEmpleado(EmpleadoMapper.toEmpleadoDTO(e));
         return ResponseEntity.ok().build();
     }
 

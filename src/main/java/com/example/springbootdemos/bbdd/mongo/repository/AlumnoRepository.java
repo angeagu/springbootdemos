@@ -12,6 +12,5 @@ public interface AlumnoRepository extends MongoRepository<Alumno, Integer> {
 
     List<Alumno> findByNombreContains(@Param("nombre") String nombre);
     List<Alumno> findByApellidoContains(@Param("apellido") String apellido);
-    List<Alumno> findByDireccionContains(@Param("direccion") String direccion);
 
 }

@@ -1,7 +1,9 @@
 package com.example.springbootdemos.basicrest.service;
 
+import com.example.springbootdemos.basicrest.dto.EmpleadoDTO;
 import com.example.springbootdemos.basicrest.exception.EmpleadoNoEncontradoException;
-import com.example.springbootdemos.basicrest.model.Empleado;
+import com.example.springbootdemos.basicrest.request.Empleado;
+import com.example.springbootdemos.basicrest.mapper.EmpleadoMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,29 +11,29 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class BasicRestService {
+public class BasicRestService implements IBasicRestService{
 
-    private final List<Empleado> listaEmpleados;
+    private final List<EmpleadoDTO> listaEmpleados;
 
-    public void addEmpleado(Empleado e) {
+    public void addEmpleado(EmpleadoDTO e) {
         listaEmpleados.add(e);
     }
 
-    public List<Empleado> getEmpleados() {
+    public List<EmpleadoDTO> getEmpleados() {
         return listaEmpleados;
     }
 
-    public Empleado getEmpleado(String id) {
+    public EmpleadoDTO getEmpleado(String id) {
         return listaEmpleados.stream().filter(empleado -> empleado.getId().equals(id)).findAny()
                 .orElseThrow(() -> new EmpleadoNoEncontradoException(id));
     }
 
-    public void updateEmpleado(Empleado e) {
-        for(Empleado empleado : listaEmpleados) {
+    public void updateEmpleado(EmpleadoDTO e) {
+        for(EmpleadoDTO empleado : listaEmpleados) {
             if (empleado.getId().equals(e.getId())) {
-                empleado.setNombre(e.getNombre());
-                empleado.setApellido(e.getApellido());
-                empleado.setCargo(e.getCargo());
+                empleado.setName(e.getName());
+                empleado.setSurname(e.getSurname());
+                empleado.setPosition(e.getPosition());
                 return;
             }
         }

@@ -1,6 +1,6 @@
 package com.example.springbootdemos.basicrest;
 
-import com.example.springbootdemos.basicrest.model.Empleado;
+import com.example.springbootdemos.basicrest.request.Empleado;
 import org.springframework.context.annotation.Bean;
 
 import java.util.ArrayList;

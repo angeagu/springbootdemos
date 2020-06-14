@@ -16,32 +16,31 @@ import java.util.List;
 @AllArgsConstructor
 public class AlumnoController {
     
-    @Autowired
     private final AlumnoService alumnoService;
 
-    @GetMapping(value="/alumno", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value="/alumnos", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Alumno>> getAlumnos() {
         return ResponseEntity.ok().body(alumnoService.getAlumnos());
     }
 
-    @GetMapping(value="/alumno/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value="/alumnos/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Alumno> getAlumno(@PathVariable(required=true) Integer id) {
         return ResponseEntity.ok().body(alumnoService.getAlumno(id));
     }
 
-    @PostMapping(value="/alumno", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value="/alumnos", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity addAlumno(@RequestBody @Valid Alumno e) {
         alumnoService.addAlumno(e);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping(value="/alumno", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value="/alumnos", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Alumno> updateAlumno(@RequestBody @Valid Alumno e) {
         alumnoService.updateAlumno(e);
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping(value="/alumno/{id}")
+    @DeleteMapping(value="/alumnos/{id}")
     public ResponseEntity<Alumno> deleteAlumno(@PathVariable(required = true) Integer id) {
         alumnoService.deleteAlumno(id);
         return ResponseEntity.ok().build();

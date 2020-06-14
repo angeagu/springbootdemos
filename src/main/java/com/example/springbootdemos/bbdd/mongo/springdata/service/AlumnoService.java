@@ -32,7 +32,7 @@ public class AlumnoService {
         if(al!=null) {
             al.setNombre(alumno.getNombre());
             al.setApellido(alumno.getApellido());
-            al.setDireccion(alumno.getDireccion());
+            al.setDatosContacto(alumno.getDatosContacto());
         }
         alumnoRepository.save(al);
     }

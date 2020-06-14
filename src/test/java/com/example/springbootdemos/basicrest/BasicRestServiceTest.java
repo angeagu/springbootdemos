@@ -1,7 +1,8 @@
 package com.example.springbootdemos.basicrest;
 
+import com.example.springbootdemos.basicrest.dto.EmpleadoDTO;
 import com.example.springbootdemos.basicrest.exception.EmpleadoNoEncontradoException;
-import com.example.springbootdemos.basicrest.model.Empleado;
+import com.example.springbootdemos.basicrest.request.Empleado;
 import com.example.springbootdemos.basicrest.service.BasicRestService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
@@ -23,21 +24,23 @@ public class BasicRestServiceTest {
     private BasicRestService basicRestService = new BasicRestService(new ArrayList());
 
     @Resource
-    private List<Empleado> listaEmpleados;
+    private List<EmpleadoDTO> listaEmpleados;
 
     @Before
     public void init() {
         log.info("init, before each...");
-        Empleado empleado = new Empleado();
-        empleado.setNombre("Angel");
-        empleado.setCargo("Tech Lead");
-        empleado.setApellido("Aguado");
-        empleado.setId("1");
-        Empleado empleado2 = new Empleado();
-        empleado2.setNombre("Javier");
-        empleado2.setCargo("Ingeniero Software");
-        empleado2.setApellido("Lopez");
-        empleado2.setId("2");
+        EmpleadoDTO empleado = EmpleadoDTO.builder()
+                .name("Angel")
+                .surname("Aguado")
+                .position("Tech Lead")
+                .id("1")
+                .build();
+        EmpleadoDTO empleado2 = EmpleadoDTO.builder()
+                .name("Javier")
+                .surname("Lopez")
+                .position("Ingeniero Software")
+                .id("2")
+                .build();
         basicRestService.addEmpleado(empleado);
         basicRestService.addEmpleado(empleado2);
     }
@@ -56,24 +59,26 @@ public class BasicRestServiceTest {
 
     @Test
     public void addEmpleado() {
-        Empleado empleado = new Empleado();
-        empleado.setId("3");
-        empleado.setNombre("Pedro");
-        empleado.setApellido("Llorente");
-        empleado.setCargo("Tester");
+        EmpleadoDTO empleado = EmpleadoDTO.builder()
+                .name("Pedro")
+                .surname("Perez")
+                .position("Tester")
+                .id("3")
+                .build();
         basicRestService.addEmpleado(empleado);
         assert(basicRestService.getEmpleados().size()==3);
     }
 
     @Test
     public void updateEmpleado() {
-        Empleado empleado = new Empleado();
-        empleado.setNombre("Javier");
-        empleado.setCargo("Analista Funcional");
-        empleado.setApellido("Lopez");
-        empleado.setId("2");
+        EmpleadoDTO empleado = EmpleadoDTO.builder()
+                .name("Javier")
+                .surname("Lopez")
+                .position("Analista Funcional")
+                .id("2")
+                .build();
         basicRestService.updateEmpleado(empleado);
-        assert(basicRestService.getEmpleado("2").getCargo().equals("Analista Funcional"));
+        assert(basicRestService.getEmpleado("2").getPosition().equals("Analista Funcional"));
     }
 
     @Test
