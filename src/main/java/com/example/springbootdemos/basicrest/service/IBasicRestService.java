@@ -11,6 +11,7 @@ public interface IBasicRestService {
 
     void addEmpleado(EmpleadoDTO empleadoDTO);
     void updateEmpleado(EmpleadoDTO empleadoDTO);
+    void patchEmpleado(String id, EmpleadoDTO empleadoDTO);
     void deleteEmpleado(String id);
 
 }

@@ -2,7 +2,6 @@ package com.example.springbootdemos.basicrest;
 
 import com.example.springbootdemos.basicrest.dto.EmpleadoDTO;
 import com.example.springbootdemos.basicrest.exception.EmpleadoNoEncontradoException;
-import com.example.springbootdemos.basicrest.request.Empleado;
 import com.example.springbootdemos.basicrest.service.BasicRestService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
@@ -54,7 +53,7 @@ public class BasicRestServiceTest {
 
     @Test
     public void getEmpleado() {
-        assert(basicRestService.getEmpleado("1").equals(listaEmpleados.get(0)));
+        assert (basicRestService.getEmpleado("1").equals(listaEmpleados.get(0)));
     }
 
     @Test
@@ -66,7 +65,7 @@ public class BasicRestServiceTest {
                 .id("3")
                 .build();
         basicRestService.addEmpleado(empleado);
-        assert(basicRestService.getEmpleados().size()==3);
+        assert (basicRestService.getEmpleados().size() == 3);
     }
 
     @Test
@@ -78,16 +77,15 @@ public class BasicRestServiceTest {
                 .id("2")
                 .build();
         basicRestService.updateEmpleado(empleado);
-        assert(basicRestService.getEmpleado("2").getPosition().equals("Analista Funcional"));
+        assert (basicRestService.getEmpleado("2").getPosition().equals("Analista Funcional"));
     }
 
     @Test
     public void deleteEmpleado() {
         basicRestService.deleteEmpleado("1");
-        Assertions.assertThrows(EmpleadoNoEncontradoException.class,() -> basicRestService.getEmpleado("1"));
-        assert(basicRestService.getEmpleados().size()==1);
+        Assertions.assertThrows(EmpleadoNoEncontradoException.class, () -> basicRestService.getEmpleado("1"));
+        assert (basicRestService.getEmpleados().size() == 1);
     }
-
 
 
 }

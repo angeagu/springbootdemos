@@ -18,5 +18,17 @@ logging:
             feignclient: DEBUG
     org:
       springframework:
-        security: DEBUG
+        security: error
 
+
+management.endpoint.info.enabled: true
+management.endpoint.metrics.enabled: true
+management.endpoint.mappings.enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, metrics, mappings, health
+  endpoint:
+    health:
+      show-details: always

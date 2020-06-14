@@ -39,6 +39,23 @@ public class BasicRestService implements IBasicRestService{
         }
     }
 
+    public void patchEmpleado(String id, EmpleadoDTO e) {
+        for(EmpleadoDTO empleado : listaEmpleados) {
+            if (empleado.getId().equals(id)) {
+                if(e.getName()!=null) {
+                    empleado.setName(e.getName());
+                }
+                if (e.getSurname()!=null) {
+                    empleado.setSurname(e.getSurname());
+                }
+                if (e.getPosition()!=null) {
+                    empleado.setPosition(e.getPosition());
+                }
+                return;
+            }
+        }
+    }
+
     public void deleteEmpleado(String id) {
         listaEmpleados.removeIf(empleado -> empleado.getId().equals(id));
     }

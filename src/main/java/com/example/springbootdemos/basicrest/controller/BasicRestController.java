@@ -19,7 +19,6 @@ import java.util.List;
 @AllArgsConstructor
 public class BasicRestController {
 
-    @Autowired
     private final IBasicRestService basicRestService;
 
     @GetMapping(value="/empleados", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -41,6 +40,13 @@ public class BasicRestController {
     @PutMapping(value="/empleado", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<EmpleadoDTO> updateEmpleado(@RequestBody @Valid Empleado e) {
         basicRestService.updateEmpleado(EmpleadoMapper.toEmpleadoDTO(e));
+        return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping(value="/empleado/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<EmpleadoDTO> patchEmpleado(@PathVariable String id,
+                                                     @RequestBody Empleado e) {
+        basicRestService.patchEmpleado(id, EmpleadoMapper.toEmpleadoDTO(e));
         return ResponseEntity.ok().build();
     }
 
