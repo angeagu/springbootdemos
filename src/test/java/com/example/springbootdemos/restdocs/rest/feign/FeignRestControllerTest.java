@@ -18,8 +18,7 @@ import java.util.List;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -103,6 +102,12 @@ public class FeignRestControllerTest extends BaseControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andDo(MockMvcRestDocumentation.document("feign/jsonplaceholder/posts",
+                        requestFields(
+                                fieldWithPath("id").description("Post ID"),
+                                fieldWithPath("body").description("Post Body"),
+                                fieldWithPath("title").description("Post Title"),
+                                fieldWithPath("userId").description("Post User ID")
+                        ),
                         responseFields(
                                 fieldWithPath("headers").description("HTTP response headers"),
                                 fieldWithPath("statusCode").description("HTTP status message"),
@@ -110,7 +115,6 @@ public class FeignRestControllerTest extends BaseControllerTest {
                                 fieldWithPath("body").description("HTTP response body")
                         )));
         verify(postClient).create(any(PostData.class));
-
     }
 
     @Test
@@ -130,6 +134,12 @@ public class FeignRestControllerTest extends BaseControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andDo(MockMvcRestDocumentation.document("feign/jsonplaceholder/posts",
+                        requestFields(
+                                fieldWithPath("id").description("Post ID"),
+                                fieldWithPath("body").description("Post Body"),
+                                fieldWithPath("title").description("Post Title"),
+                                fieldWithPath("userId").description("Post User ID")
+                        ),
                         responseFields(
                                 fieldWithPath("id").description("Post ID"),
                                 fieldWithPath("body").description("Post Body"),
