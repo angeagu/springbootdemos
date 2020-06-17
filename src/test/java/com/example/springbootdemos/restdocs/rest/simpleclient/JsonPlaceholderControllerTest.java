@@ -98,6 +98,12 @@ public class JsonPlaceholderControllerTest extends BaseControllerTest {
 				.andDo(MockMvcResultHandlers.print())
 				.andExpect(status().isOk())
 				.andDo(MockMvcRestDocumentation.document("simpleclient/jsonplaceholder/todos",
+						requestFields(
+							fieldWithPath("id").description("Todo ID"),
+							fieldWithPath("userId").description("Todo User ID"),
+							fieldWithPath("title").description("Todo Title"),
+							fieldWithPath("completed").description("Todo Status (true=completed)")
+						),
 						responseFields(
 								fieldWithPath("id").description("Todo ID")
 						)));
@@ -120,6 +126,12 @@ public class JsonPlaceholderControllerTest extends BaseControllerTest {
 				.accept(MediaType.APPLICATION_JSON))
 				.andDo(MockMvcResultHandlers.print())
 				.andExpect(status().isOk())
-				.andDo(MockMvcRestDocumentation.document("simpleclient/jsonplaceholder/todos"));
+				.andDo(MockMvcRestDocumentation.document("simpleclient/jsonplaceholder/todos",
+						requestFields(
+							fieldWithPath("id").description("Todo ID"),
+							fieldWithPath("userId").description("Todo User ID"),
+							fieldWithPath("title").description("Todo Title"),
+							fieldWithPath("completed").description("Todo Status (true=completed)")
+						)));
 	}
 }

@@ -2,6 +2,7 @@ package com.example.springbootdemos.rest.simpleclient.controller;
 
 import com.example.springbootdemos.rest.simpleclient.service.JsonPlaceholderService;
 import com.example.springbootdemos.rest.simpleclient.model.TodoData;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +37,7 @@ public class JsonPlaceholderController {
 	@PutMapping(path="/todos/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity updateTodo(@PathVariable(required=true) Integer id, @RequestBody TodoData todoData) {
 		jsonPlaceholderService.updateTodo(id,todoData);
-		return ResponseEntity.ok("OK");
+		return ResponseEntity.ok().build();
 	}
 
 }
