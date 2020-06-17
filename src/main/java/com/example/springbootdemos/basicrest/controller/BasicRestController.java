@@ -7,6 +7,7 @@ import com.example.springbootdemos.basicrest.service.BasicRestService;
 import com.example.springbootdemos.basicrest.service.IBasicRestService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +35,7 @@ public class BasicRestController {
     @PostMapping(value="/empleado", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity addEmpleado(@RequestBody @Valid Empleado e) {
         basicRestService.addEmpleado(EmpleadoMapper.toEmpleadoDTO(e));
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping(value="/empleado", consumes = MediaType.APPLICATION_JSON_VALUE)

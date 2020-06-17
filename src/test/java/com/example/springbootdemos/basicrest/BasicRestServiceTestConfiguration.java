@@ -4,23 +4,30 @@ import com.example.springbootdemos.basicrest.dto.EmpleadoDTO;
 import org.springframework.context.annotation.Bean;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class BasicRestServiceTestConfiguration
 {
+
+    Date creationDate = new Date();
+
+    @Bean
+    public Date creationDate() {
+        return creationDate;
+    }
+
     @Bean
     List<EmpleadoDTO> listaEmpleados() {
         List<EmpleadoDTO> listaEmpleados = new ArrayList<>();
         EmpleadoDTO empleado = EmpleadoDTO.builder()
-                .name("Angel")
-                .surname("Aguado")
-                .position("Tech Lead")
+                .fullName("Angel Aguado")
+                .creation(creationDate())
                 .id("1")
                 .build();
         EmpleadoDTO empleado2 = EmpleadoDTO.builder()
-                .name("Javier")
-                .surname("Lopez")
-                .position("Ingeniero Software")
+                .fullName("Javier Lopez")
+                .creation(creationDate())
                 .id("2")
                 .build();
         listaEmpleados.add(empleado);

@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Builder
 @Data
 @NoArgsConstructor
@@ -12,8 +14,7 @@ import lombok.NoArgsConstructor;
 public class EmpleadoDTO {
 
     private String id;
-    private String name;
-    private String surname;
-    private String position;
+    private String fullName;
+    private Date creation;
 
 }

@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -25,19 +26,20 @@ public class BasicRestServiceTest {
     @Resource
     private List<EmpleadoDTO> listaEmpleados;
 
+    @Resource
+    private Date creationDate;
+
     @Before
     public void init() {
         log.info("init, before each...");
         EmpleadoDTO empleado = EmpleadoDTO.builder()
-                .name("Angel")
-                .surname("Aguado")
-                .position("Tech Lead")
+                .fullName("Angel Aguado")
+                .creation(creationDate)
                 .id("1")
                 .build();
         EmpleadoDTO empleado2 = EmpleadoDTO.builder()
-                .name("Javier")
-                .surname("Lopez")
-                .position("Ingeniero Software")
+                .fullName("Javier Lopez")
+                .creation(creationDate)
                 .id("2")
                 .build();
         basicRestService.addEmpleado(empleado);
@@ -59,9 +61,7 @@ public class BasicRestServiceTest {
     @Test
     public void addEmpleado() {
         EmpleadoDTO empleado = EmpleadoDTO.builder()
-                .name("Pedro")
-                .surname("Perez")
-                .position("Tester")
+                .fullName("Pedro Perez")
                 .id("3")
                 .build();
         basicRestService.addEmpleado(empleado);
@@ -71,13 +71,12 @@ public class BasicRestServiceTest {
     @Test
     public void updateEmpleado() {
         EmpleadoDTO empleado = EmpleadoDTO.builder()
-                .name("Javier")
-                .surname("Lopez")
-                .position("Analista Funcional")
+                .fullName("Javier Perez")
+                .creation(creationDate)
                 .id("2")
                 .build();
         basicRestService.updateEmpleado(empleado);
-        assert (basicRestService.getEmpleado("2").getPosition().equals("Analista Funcional"));
+        assert (basicRestService.getEmpleado("2").getFullName().equals("Javier Perez"));
     }
 
     @Test
