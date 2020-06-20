@@ -4,6 +4,7 @@ spring:
     - mysql
     - feign
     - mongo
+    active: vector
 
 springdoc:
   swagger-ui:
@@ -21,14 +22,17 @@ logging:
         security: error
 
 
+management.endpoint.beans.enabled: true
 management.endpoint.info.enabled: true
 management.endpoint.metrics.enabled: true
 management.endpoint.mappings.enabled: true
+
 management:
   endpoints:
     web:
       exposure:
-        include: info, metrics, mappings, health
+        include: info, metrics, mappings, health, beans
   endpoint:
     health:
       show-details: always
+

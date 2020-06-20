@@ -88,8 +88,7 @@ public class JsonPlaceholderControllerTest extends BaseControllerTest {
 
 		ObjectMapper objectMapper = new ObjectMapper();
 		String content = objectMapper.writeValueAsString(todoData);
-		when(jsonPlaceholderService.addTodo(any(TodoData.class))).thenReturn("{\n" +
-				"  \"id\" : 1\n" + "}");
+		when(jsonPlaceholderService.addTodo(any(TodoData.class))).thenReturn(todoData);
 
 		this.mockMvc.perform(post("/demo/rest/consumer/jsonplaceholder/todos")
 				.contentType(MediaType.APPLICATION_JSON)
@@ -105,7 +104,10 @@ public class JsonPlaceholderControllerTest extends BaseControllerTest {
 							fieldWithPath("completed").description("Todo Status (true=completed)")
 						),
 						responseFields(
-								fieldWithPath("id").description("Todo ID")
+							fieldWithPath("id").description("Todo ID"),
+							fieldWithPath("userId").description("Todo User ID"),
+							fieldWithPath("title").description("Todo Title"),
+							fieldWithPath("completed").description("Todo Status (true=completed)")
 						)));
 	}
 

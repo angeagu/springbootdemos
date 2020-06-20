@@ -7,29 +7,30 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Vector;
 
-@Profile("list")
+@Profile("vector")
 @Service
 @AllArgsConstructor
-public class BasicRestService implements IBasicRestService{
+public class BasicRestServiceVector implements IBasicRestService {
 
-    private final List<EmpleadoDTO> listaEmpleados;
+    private final Vector<EmpleadoDTO> empleadoDTOVector;
 
     public void addEmpleado(EmpleadoDTO e) {
-        listaEmpleados.add(e);
+        empleadoDTOVector.add(e);
     }
 
     public List<EmpleadoDTO> getEmpleados() {
-        return listaEmpleados;
+        return empleadoDTOVector;
     }
 
     public EmpleadoDTO getEmpleado(String id) {
-        return listaEmpleados.stream().filter(empleado -> empleado.getId().equals(id)).findAny()
+        return empleadoDTOVector.stream().filter(empleado -> empleado.getId().equals(id)).findAny()
                 .orElseThrow(() -> new EmpleadoNoEncontradoException(id));
     }
 
     public void updateEmpleado(EmpleadoDTO e) {
-        for(EmpleadoDTO empleado : listaEmpleados) {
+        for(EmpleadoDTO empleado : empleadoDTOVector) {
             if (empleado.getId().equals(e.getId())) {
                 empleado.setCreation(e.getCreation());
                 empleado.setFullName(e.getFullName());
@@ -39,7 +40,7 @@ public class BasicRestService implements IBasicRestService{
     }
 
     public void patchEmpleado(String id, EmpleadoDTO e) {
-        for(EmpleadoDTO empleado : listaEmpleados) {
+        for(EmpleadoDTO empleado : empleadoDTOVector) {
             if (empleado.getId().equals(id)) {
                 if(e.getFullName()!=null) {
                     empleado.setFullName(e.getFullName());
@@ -53,7 +54,7 @@ public class BasicRestService implements IBasicRestService{
     }
 
     public void deleteEmpleado(String id) {
-        listaEmpleados.removeIf(empleado -> empleado.getId().equals(id));
+        empleadoDTOVector.removeIf(empleado -> empleado.getId().equals(id));
     }
 
 }
