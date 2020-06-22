@@ -8,3 +8,4 @@ feign:
 
 post-client-server: https://jsonplaceholder.typicode.com/
 feign-client-log-level: FULL
+

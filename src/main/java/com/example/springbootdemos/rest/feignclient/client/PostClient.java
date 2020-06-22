@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@FeignClient(value="postClient", url="https://jsonplaceholder.typicode.com")
 public interface PostClient {
 
 	@GetMapping(path="/posts", produces = MediaType.APPLICATION_JSON_VALUE)
