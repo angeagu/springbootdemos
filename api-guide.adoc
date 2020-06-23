@@ -1,0 +1,121 @@
+:doctype: book
+:toc: left
+:sectanchors:
+:sectlinks:
+:toclevels: 2
+:source-highlighter: highlights
+
+
+= Spring Boot Demo API Guide
+{microservice};
+
+
+[[overview]]
+= Overview
+
+
+[[overview-http-verbs]]
+== HTTP verbs
+
+RESTful `{microservice}` tries to adhere as closely as possible to standard HTTP and REST conventions in its
+use of HTTP verbs.
+
+|===
+| Verb | Usage
+
+| `GET`
+| Used to retrieve a resource
+
+| `POST`
+| Used to create a new resource
+
+| `PUT`
+| Used to replace an existing resource
+
+| `PATCH`
+| Used to partially update an existing resource
+
+| `DELETE`
+| Used to delete an existing resource
+|===
+
+
+[[overview-http-status-codes]]
+== HTTP status codes
+
+RESTful `{microservice}` tries to adhere as closely as possible to standard HTTP and REST conventions in its
+use of HTTP status codes.
+
+|===
+| Status code | Usage | Method
+
+| `200`
+| OK - this is the standard success response
+| All
+
+| `201`
+| Created - Returned on successful entity creation. You should return the created resource.
+| POST, PUT
+
+| `204`
+| No content - There is no response body
+| PUT, DELETE
+
+| `400`
+| The request was malformed. The response body will include an error providing further information
+| All
+
+| `404`
+| The requested resource did not exist
+| ALL
+|===
+
+[[resources]]
+= Resources
+
+== JsonPlaceholderController
+
+== GET ToDo's endpoint
+
+A GET request to retrieve TODOs
+
+=== Request fields
+
+include::{snippets}/jsonplaceholder/todo/request-fields.adoc[confluence=include]
+
+=== Response fields
+
+include::{snippets}/jsonplaceholder/todo/response-fields.adoc[confluence=include]
+
+=== Example request
+
+include::{snippets}/jsonplaceholder/todo/http-request.adoc[confluence=include]
+
+=== Example response
+
+include::{snippets}/jsonplaceholder/todo/http-response.adoc[confluence=include]
+
+
+
+
+== FeignController
+
+== GET PostData's endpoint
+
+A GET request to retrieve POSTs
+
+=== Request fields
+
+include::{snippets}/feign/jsonplaceholder/posts/request-fields.adoc[confluence=include]
+
+=== Response fields
+
+include::{snippets}/feign/jsonplaceholder/posts/response-fields.adoc[confluence=include]
+
+=== Example request
+
+include::{snippets}/feign/jsonplaceholder/posts/http-request.adoc[confluence=include]
+
+=== Example response
+
+include::{snippets}/feign/jsonplaceholder/posts/http-response.adoc[confluence=include]
