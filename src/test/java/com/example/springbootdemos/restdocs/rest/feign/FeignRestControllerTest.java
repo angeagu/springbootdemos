@@ -16,8 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -25,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureRestDocs(outputDir = "target/snippets")
 public class FeignRestControllerTest extends BaseControllerTest {
 
-    @MockBean
+    @MockBean //Mock Bean crea un mock de PostClient
     private PostClient postClient;
 
     @Test
@@ -58,7 +57,8 @@ public class FeignRestControllerTest extends BaseControllerTest {
                                 fieldWithPath("[].userId").description("Post User ID")
                         )));
 
-
+        verify(postClient).findAll();
+        verify(postClient,times(1)).findAll();
     }
 
     @Test
@@ -83,6 +83,7 @@ public class FeignRestControllerTest extends BaseControllerTest {
                                 fieldWithPath("userId").description("Post User ID")
                         )));
         verify(postClient).findById(1);
+        verify(postClient, times(1)).findById(1);
     }
 
     @Test
@@ -146,6 +147,7 @@ public class FeignRestControllerTest extends BaseControllerTest {
                                 fieldWithPath("title").description("Post Title"),
                                 fieldWithPath("userId").description("Post User ID")
                         )));
+        verify(postClient).update(anyInt(), any(PostData.class));
     }
 
 }

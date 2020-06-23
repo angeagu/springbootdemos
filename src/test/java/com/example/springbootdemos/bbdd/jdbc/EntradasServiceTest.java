@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
@@ -27,9 +28,12 @@ import static org.mockito.Mockito.when;
 public class EntradasServiceTest {
 
     @InjectMocks
+    //InjectMocks crea un objeto real EntradasService, al que le injectamos los
+    //mocks definidos con @Mock, en este caso el jdbcTemplate que necesita
     private EntradasService entradasService;
 
-    private JdbcTemplate jdbcTemplate = Mockito.mock(JdbcTemplate.class);
+    @Mock
+    private JdbcTemplate jdbcTemplate;
 
     @Resource
     private List<String> listaPeliculas;
@@ -38,7 +42,7 @@ public class EntradasServiceTest {
     public void add() {
         Entrada entrada = new Entrada();
         entrada.setId(1);
-        entrada.setFecha(new Date());
+        entrada.setFecha(new Date() );
         entrada.setPelicula("Million Dollar Baby");
         entrada.setPrecio(4.5);
         entradasService.add(entrada);
