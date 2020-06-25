@@ -7,7 +7,7 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "id": "AAA",
+  "id": "AWT",
   "nombre": "Angel",
   "apellido": "Aguado",
   "cargo": "CEO"
@@ -19,12 +19,12 @@ PUT localhost:8080/demo/basicrest/empleado
 Accept: application/json
 Content-Type: application/json
 
-    {
-        "id": "AWT",
-        "nombre": "Angel",
-        "apellido": "Aguado Andres",
-        "cargo": "Tech Lead"
-    }
+{
+  "id": "AWT",
+  "nombre": "Daniel",
+  "apellido": "Lopez",
+  "cargo": "Scrum Master"
+}
 
 ###
 

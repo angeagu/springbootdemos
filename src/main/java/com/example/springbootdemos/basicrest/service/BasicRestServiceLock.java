@@ -7,40 +7,47 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Vector;
 
-@Profile("vector")
+@Profile("lock")
 @Service
 @AllArgsConstructor
-public class BasicRestServiceVector implements IBasicRestService {
+public class BasicRestServiceLock implements IBasicRestService {
 
-    private final Vector<EmpleadoDTO> empleadoDTOVector;
+    private final List<EmpleadoDTO> empleadoDTOList;
 
     public void addEmpleado(EmpleadoDTO e) {
-        empleadoDTOVector.add(e);
+        empleadoDTOList.add(e);
     }
 
     public List<EmpleadoDTO> getEmpleados() {
-        return empleadoDTOVector;
+        return empleadoDTOList;
     }
 
     public EmpleadoDTO getEmpleado(String id) {
-        return empleadoDTOVector.stream().filter(empleado -> empleado.getId().equals(id)).findAny()
+        return empleadoDTOList.stream().filter(empleado -> empleado.getId().equals(id)).findAny()
                 .orElseThrow(() -> new EmpleadoNoEncontradoException(id));
     }
 
-    public void updateEmpleado(EmpleadoDTO e) {
-        for(EmpleadoDTO empleado : empleadoDTOVector) {
+    public synchronized void updateEmpleado(EmpleadoDTO e) {
+        for(EmpleadoDTO empleado : empleadoDTOList) {
             if (empleado.getId().equals(e.getId())) {
                 empleado.setCreation(e.getCreation());
                 empleado.setFullName(e.getFullName());
+                try {
+                    if (e.getFullName().contains("Torres")) {
+                        Thread.sleep(10000);
+                    }
+                }
+                catch (Exception ex) {
+
+                }
                 return;
             }
         }
     }
 
-    public void patchEmpleado(String id, EmpleadoDTO e) {
-        for(EmpleadoDTO empleado : empleadoDTOVector) {
+    public synchronized void patchEmpleado(String id, EmpleadoDTO e) {
+        for(EmpleadoDTO empleado : empleadoDTOList) {
             if (empleado.getId().equals(id)) {
                 if(e.getFullName()!=null) {
                     empleado.setFullName(e.getFullName());
@@ -53,8 +60,8 @@ public class BasicRestServiceVector implements IBasicRestService {
         }
     }
 
-    public void deleteEmpleado(String id) {
-        empleadoDTOVector.removeIf(empleado -> empleado.getId().equals(id));
+    public synchronized void deleteEmpleado(String id) {
+        empleadoDTOList.removeIf(empleado -> empleado.getId().equals(id));
     }
 
 }

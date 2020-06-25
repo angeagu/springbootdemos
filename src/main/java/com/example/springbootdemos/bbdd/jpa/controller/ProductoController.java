@@ -22,13 +22,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@RequestMapping(path="/demo/bbdd/jpa/productos")
+@RequestMapping(path="/demo/bbdd/jpa/")
 public class ProductoController {
 	
 	@Autowired
 	private ProductoRepository productoRepository;
 	
-	@GetMapping(path="/select", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path="/productos", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Producto>> selectProductos(@RequestParam(required=false) Integer id_producto) {
 		if(id_producto!=null) {
 			Integer[] array = {id_producto};
@@ -37,7 +37,7 @@ public class ProductoController {
 		return ResponseEntity.ok().body(productoRepository.findAll());
 	}
 	
-	@PostMapping(path="/insert", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path="/productos", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity insertProducto(@RequestBody(required=true) Producto producto) {
 		try {
 			productoRepository.save(producto);
@@ -50,7 +50,7 @@ public class ProductoController {
 		}
 	}
 	
-	@DeleteMapping(path="/delete/{id_producto}") //id producto as PathVariable
+	@DeleteMapping(path="/productos/{id_producto}") //id producto as PathVariable
 	public ResponseEntity deleteProducto(@PathVariable(required=true) Integer id_producto) {
 		productoRepository.deleteById(id_producto);
 		return ResponseEntity.ok().build();
